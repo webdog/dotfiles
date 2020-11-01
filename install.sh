@@ -15,10 +15,9 @@ case "$(uname -s)" in
         # see nvm and node after the script has run.
         source '/root/.zshrc'
         nvm install node
+        npm install -g aws-cdk
         echo "..."
         echo "done!"
-        npm install -g aws-cdk
-
         fi
     ;;
     Darwin)
