@@ -21,8 +21,67 @@ case "$(uname -s)" in
         fi
     ;;
     Darwin)
-    # TODO add my macOS configuration here
-    echo "This is a macOS environment. Add your things here"
+    # Required developer tools for Mac OS
+    xcode-select --install
+    # oh-my-zsh
+    if [ ! -d "$/Users/${USER}/.oh-my-zsh"]; then
+        echo "installing oh-my-zsh"
+        #sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    fi
+    
+    # Install homebrew if it's not installed by checking that the symlink doesn't exist
+    if [ ! -h /usr/local/bin/brew ]; then
+        echo "Homebrew not found, installing..."
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"  
+    fi
+    brew update
+    # Install powerline fonts
+    git clone https://github.com/powerline/fonts && cd fonts && exec './install.sh'
+    rm -rf fonts/
+    # Tap to install Hashicorp tools 
+    brew tap hashicorp/tap
+    # Install Hashicorp tools
+    brew install terraform \            # All the HashiCorp things
+                 packer     \ 
+                 nomad       \
+                 vault        \
+                 consul        \
+                 waypoint       \
+                 vagrant         \ 
+                 boundary
+    brew install --cask virtualbox          # Virtualbox, use as a provider for Vagrant
+
+    # Clould CLIs
+    brew install awscli
+    brew install azure-cli
+    brew install --cask google-cloud-sdk
+
+    # Languages
+    brew install --cask anaconda            # Python
+    brew install node@14                    # Node LTS
+    brew install typescript                 # Typescript
+    brew install golang                     # Go
+    brew install --cask dotnet              # C#
+        brew install mono-libgdiplus            # Install if using System.Drawing.Common with C#
+    brew install --cask corretto            # AWS OpenJDK
+
+    # IACs
+    npm i -g aws-cdk                        # AWS CDK. Installs cdkv1
+    brew install pulumi                     # Pulumi
+    brew install cloudformation-cli         # CloudFormation CLI. Note: You can use the awscli to interact with CloudFormation as well.
+    brew install cfn-lint                   # cfn-lint for CloudFormation
+    
+    # Assorted tools
+    brew install httpie                     # A prettier curl/wget
+    brew install jq                         # command line json parser
+    brew install tmux                       # Terminal Multiplexer
+    brew install vim                        # Brew provided vim. The shipped version of vim with macos is missing features like folding.
+    brew install --cask obsidian            # Markdown-focused personal knowledge base. Works well for folks doing zettelkasten
+    brew install lftp                       # Nice CLI FTP
+    brew install --cask typora              # A markdown editor with awesome UX
+
+    # IDEs
+    brew install --cask visual-studio-code  # Visual Studio Code
     ;;
 esac
 
