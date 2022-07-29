@@ -43,8 +43,20 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 HIST_STAMPS="yyyy-mm-dd"
 
 plugins=(git fzf-tab zsh-completions docker docker-compose tmux)
-
-
+# Would you like to use another custom folder than $ZSH/custom?
+#case $__CFBundleIdentifier in
+#  com.googlecode.iterm2)
+#    TMUX_SESSIONS=$(tmux list-sessions | awk -F':' {'print $1'})
+#    if [[ "$TMUX_SESSIONS" == *"TMUX"* ]]; then
+#      tmux attach -t TMUX
+#    else
+#      tmux new -s TMUX
+#    fi
+#    ;;
+#  com.jetbrains.pycharm)
+#    true
+#    ;;
+#esac
 # Check which app is currently launching zshrc, and then execute some code.
 # Fixes an annoyance where tmux would the exact same session in any terminal window, including Pycharm.
 # Now, only do that when running iTerm. The Pycharm case statement does nothing right now,
@@ -64,11 +76,20 @@ plugins=(git fzf-tab zsh-completions docker docker-compose tmux)
 #    ;;
 #esac
 
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 # export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -139,10 +160,47 @@ complete            -C aws_completer aws
 autoload -U +X bashcompinit && bashcompinit
 autoload -U    compinit     && compinit
 
-# kubectl autocompletion
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
 source <(kubectl completion zsh)
-compdef __start_kubectl ktl
+alias k=kubectl
+compdef __start_kubectl k
+#eval $(docker-machine env docker-debian-10)
+alias cat=bat
 
+# Vault installation
+#
+alias vup="vagrant up --provider virtualbox"
+alias vdf="vagrant destroy -f"
+
+#function diskutil() {
+#	case $1 in
+#		"list") shift
+#			command diskutil list -plist | plutil -convert json -r -o - -- - | jq -r
+#			;;
+#	esac
+#}
+#
+#
+
+#diskutil() {
+#	args=("$@")
+#	case $1 in
+#   "list") shift
+#     command diskutil list -plist | plutil -convert json -r -o - -- - | jq -r
+#     ;;
+#	 *)
+#		 diskutil "${args[@]}"
+#		;;
+#
+#	esac
+#}
 export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 export TIME_STYLE="long-iso"
@@ -268,4 +326,4 @@ else
     fi
 fi
 unset __conda_setup
-# <<< conda initialize <<<
+# <<< conda initialize <<
