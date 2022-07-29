@@ -12,7 +12,10 @@ set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 set backspace=indent,eol,start
 autocmd vimenter * ++nested colorscheme gruvbox
 set guifont:SpaceMono\ Nerd\ Font\ Mono:h24
+set bg=dark
+let icl = "/Users/webdog/vim"
 let mapleader=','
+let imapleader=','
 let g:table_mode_corner='|'
 set t_Co=256
 
@@ -34,6 +37,9 @@ function! ToggleHiddenAll()
 endfunction
 
 nnoremap <S-h> :call ToggleHiddenAll()<CR>
+"nnoremap <S-l> :NERDTreeToggle `=icl`<CR><CR>
+"let NERDTreeQuitOnOpen = 1
+"let NERDTreeMinimalUI = 1
 "nnoremap <C-t> :Fern . -drawer -toggle<CR>
 set encoding=utf-8
 let g:fern#renderer = "nerdfont"
