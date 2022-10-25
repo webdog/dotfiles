@@ -1,4 +1,17 @@
 execute pathogen#infect()
+" Use homebrew's clangd
+let g:ycm_clangd_binary_path = trim(system('brew --prefix llvm')).'/bin/clangd'
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
+source /Users/webdog/github/ycm-core/lsp-examples/vimrc.generated
+" Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
+" - https://github.com/Valloric/YouCompleteMe
+" - https://github.com/nvim-lua/completion-nvim
+let g:UltiSnipsExpandTrigger="<c-e>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 syntax on
 set nocompatible
 filetype plugin indent on
@@ -35,7 +48,10 @@ function! ToggleHiddenAll()
         set showcmd
     endif
 endfunction
-
+inoremap <c-j> <Down>
+inoremap <c-k> <Up>
+inoremap <c-h> <Left>
+inoremap <c-l> <Right>
 nnoremap <S-h> :call ToggleHiddenAll()<CR>
 "nnoremap <S-l> :NERDTreeToggle `=icl`<CR><CR>
 "let NERDTreeQuitOnOpen = 1

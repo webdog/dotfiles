@@ -1,0 +1,2 @@
+alias jk="jq 'keys'"
+

@@ -1,0 +1,10 @@
+alias ktl="kubectl"
+alias pods="ktl get pods"
+alias nodes="ktl get nodes"
+alias kctoken="ktl get secrets server-bootstrap-acl-token -o json | jq -r '.data.token' | base64 -d | pbcopy"
+alias deployments="ktl get deployments"
+alias services="ktl get services"
+alias kctx="ktl config get-contexts -o name"
+alias kswt="ktl config use-context $1"
+alias wpods="watch -n2 kubectl get pods"
+
