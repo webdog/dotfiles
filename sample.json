@@ -1,0 +1,36 @@
+{
+  "calendar_account": {
+
+
+
+    "automation_rules": [
+
+
+
+      {
+        "match_type": "all",
+        "rules": [
+          {"title_contains": "Hello World"},
+          {"location_is": "Chicago"}
+        ],
+        "tags": ["chicago", "home", "personal"],
+        "my_tags": "true"
+      },
+
+
+
+      {
+        "match_type": "any",
+        "rules": [
+          {"notes_begins_with": "Your personal Zoom meeting"},
+          {"url_is": "https://busycal.zoom.us"}
+        ],
+        "tags": ["zoom", "busycal", "personal_meeting"],
+        "my_tags": "false"
+      }
+
+
+
+    ]
+  }
+}
